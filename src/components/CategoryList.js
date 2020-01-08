@@ -17,6 +17,10 @@ function categoryReducer (state, action) {
         children: [],
       })
       return newState
+    case 'delete_children':
+      newState = {...state}
+      newState.categories.splice(action.payload.index, 1)
+      return newState
     default:
       return state
   }
@@ -39,6 +43,11 @@ function CategoryList (props) {
                             onAddChildren={
                               () => {
                                 categoryDispatch({type: 'add_children', payload: {index}})
+                              }
+                            }
+                            onDeleteChildren={
+                              () => {
+                                categoryDispatch({type: 'delete_children', payload: {index}})
                               }
                             }
           />

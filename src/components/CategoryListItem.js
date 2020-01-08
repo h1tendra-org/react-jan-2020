@@ -26,6 +26,7 @@ function CategoryListItem (props) {
             {category.name}
             <button type="button" onClick={() => setEditMode(true)}>Edit</button>
             <button type="button" onClick={() => props.onAddChildren()}>+</button>
+            <button type="button" onClick={() => props.onDeleteChildren()}>-</button>
           </React.Fragment>
       }
       {children ? <CategoryList categories={children}/> : null}
