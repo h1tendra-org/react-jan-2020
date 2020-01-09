@@ -1,9 +1,9 @@
-import categories from '../../categories.json'
-
-function categoryReducer(state = { categories, incId: categories.length }, action) {
+function categoryReducer(state = { categories: [], incId: 0 }, action) {
     let newState, incId
 
     switch (action.type) {
+        case 'set_categories':
+            return { ...state, categories: action.payload, incId: action.payload.length }
         case 'update_category':
             newState = { ...state }
 

@@ -7,6 +7,21 @@ function Category() {
     const categoryState = useSelector(state => state.category)
     const dispatch = useDispatch()
     const categories = getCategoryTreeView(categoryState.categories)
+    const [dataLoaded, setDataLoaded] = React.useState(false)
+
+    React.useEffect(() => {
+        async function loadData() {
+            try {
+                let data = await fetch('/categories.json')
+                data = await data.json()
+                dispatch({ type: 'set_categories', payload: data })
+                setDataLoaded(true)
+            } catch (e) {
+                setDataLoaded(true)
+            }
+        }
+        loadData()
+    }, [dataLoaded, dispatch])
 
     return <React.Fragment>
         <div>
