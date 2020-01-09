@@ -1,28 +1,52 @@
 import categories from '../../categories.json'
 
-function categoryReducer(state = { categories }, action) {
-    let newState
+function categoryReducer(state = { categories, incId: categories.length }, action) {
+    let newState, incId
+
     switch (action.type) {
         case 'update_category':
             newState = { ...state }
-            newState.categories[action.payload.index] = action.payload.payload
-            return newState
-        case 'set_category':
-            newState = { ...state }
-            newState.categories = action.payload
+
+            function getItemIndexById(id) {
+                let itemFound = false, index = 0
+
+                while (!itemFound) {
+                    const item = newState.categories[index]
+
+                    if (!item) break
+
+                    if (id === item.id) {
+                        itemFound = true
+                        break
+                    }
+
+                    index++
+                }
+
+                return itemFound ? index : -1
+            }
+
+            const index = getItemIndexById(action.payload.id)
+
+            if (index !== -1) {
+                newState.categories[index] = action.payload
+            }
+
             return newState
         case 'remove_category':
             newState = { ...state }
-            newState.categories.splice(action.payload.index)
+            newState.categories = newState.categories.filter(item => item.id !== action.payload.id)
             return newState
         case 'add_category':
             newState = { ...state }
-            newState.categories.push({
+            incId = newState.incId + 1
+            newState.categories = [...newState.categories, {
                 name: '',
-                id: newState.categories.length + 1,
-                parent_id: newState.id,
+                id: incId,
+                parent_id: action.payload.parent_id,
                 children: [],
-            })
+            }]
+            newState.incId = incId
             return newState
         default:
             return state

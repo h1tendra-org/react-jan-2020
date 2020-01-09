@@ -2,20 +2,11 @@
     {
         "id": 1,
         "name": "Men",
-        "parent_id": 0,
-        "children": [
-            {
-                "id": 3,
-                "name": "Clothing",
-                "parent_id": 1,
-                "children": []
-            }
-        ]
+        "parent_id": 0
     },
     {
         "id": 2,
         "name": "Women",
-        "parent_id": 0,
-        "children": []
+        "parent_id": 0
     }
 ]

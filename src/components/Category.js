@@ -8,20 +8,9 @@ function Category() {
 
     return <React.Fragment>
         <div>
-            <button type="button" onClick={() => dispatch({ type: 'add_category' })}>Add parent category</button>
+            <button type="button" onClick={() => dispatch({ type: 'add_category', payload: { parent_id: 0 } })}>Add parent category</button>
         </div>
-        <CategoryList categories={categoryState.categories}
-            onUpdateCategory={
-                (payload) => {
-                    dispatch({ type: 'update_category', payload })
-                }
-            }
-            onRemoveCategory={
-                (payload) => {
-                    dispatch({ type: 'set_category', payload })
-                }
-            }
-        />
+        <CategoryList categories={categoryState.categories} />
     </React.Fragment>
 }
 
