@@ -23,3 +23,21 @@ export function getCategoryTreeView(categories) {
 
     return getCategoryHierarchy(parents, childrens)
 }
+
+export function saveState(name, data) {
+    try {
+        localStorage.setItem(name, JSON.stringify(data))
+    } catch (e) {
+    }
+}
+
+export function getState(name) {
+    let data = null
+
+    try {
+        data = JSON.parse(localStorage.getItem(name))
+    } catch (e) {
+    }
+
+    return data
+}

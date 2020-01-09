@@ -20,8 +20,13 @@ function Category() {
                 setDataLoaded(true)
             }
         }
-        loadData()
-    }, [dataLoaded, dispatch])
+
+        if (!dataLoaded && categories.length === 0) {
+            loadData()
+        } else if (!dataLoaded) {
+            setDataLoaded(true)
+        }
+    }, [dataLoaded, dispatch, categories])
 
     return <React.Fragment>
         <div>
